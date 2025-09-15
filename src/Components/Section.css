@@ -1,0 +1,17 @@
+.section-card {
+  background-color: rgba(245, 232, 183, 0.9); /* #F5E8B7 */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  color: #6A9C89;
+  text-align: center;
+}
+
+.section-card h2 {
+  margin-bottom: 15px;
+  color: #CD5C08;
+}
+
+.section-card p {
+  font-size: 1rem;
+}
