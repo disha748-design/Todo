@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "../supabaseClient";
 import "./Profile.css";
 
 export default function Profile({ user, onLogout }) {

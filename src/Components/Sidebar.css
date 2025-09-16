@@ -1,23 +1,27 @@
 /* Sidebar container */
 .sidebar {
   width: 220px;
-  background-color: rgba(193, 216, 195, 0.9); /* #C1D8C3 */
+  background-color: #C1D8C3;
   padding: 20px;
-  border-radius: 0 20px 20px 0;
+  border-radius: 10px;
+  margin-top: 15px; /* spacing below navbar */
+  height: calc(100vh - 70px);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 0 12px rgba(0,0,0,0.1);
 }
 
-/* Sidebar header */
+/* Sidebar heading */
 .sidebar h3 {
-  color: #6A9C89;
-  margin-bottom: 15px;
-  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #3E5F44;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
-/* List of categories */
+/* Sidebar list */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -25,29 +29,65 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1;
 }
 
-/* Individual category item */
+/* Sidebar items */
 .sidebar li {
   padding: 12px 15px;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
   color: #3E5F44;
   font-weight: 500;
-  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
 
-/* Active or hover state */
+/* Active / hover state */
 .sidebar li.active,
 .sidebar li:hover {
-  background-color: rgba(106, 156, 137, 0.9); /* #6A9C89 */
+  background-color: #6A9C89;
   color: #F5E8B7;
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
-/* Optional: subtle divider between header and categories */
-.sidebar hr {
-  border: none;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin: 10px 0;
+/* Responsive for tablets (medium screens) */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 10px 15px;
+    border-radius: 0;
+    margin-top: 0;
+    box-shadow: none;
+  }
+  .sidebar ul {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .sidebar li {
+    flex: 1;
+    text-align: center;
+    padding: 10px 5px;
+  }
+}
+
+/* Responsive for mobile (small screens) */
+@media (max-width: 500px) {
+  .sidebar {
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 0;
+    margin-top: 0;
+  }
+  .sidebar ul {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .sidebar li {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 }

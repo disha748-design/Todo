@@ -1,21 +1,42 @@
-import "./Navbar.css"
+import React, { useState } from "react";
+import "./Navbar.css";
 
-export default function Navbar({ activeSection, setActiveSection }) {
-  const links = ["todos", "mindmap", "diary", "pomodoro", "profile"]
+export default function Navbar({ activeSection, setActiveSection, user }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const sections = ["todos", "mindmap", "diary", "pomodoro", "profile"];
+
   return (
     <nav className="navbar">
-      <h2>My Dashboard</h2>
-      <ul>
-        {links.map(link => (
-          <li 
-            key={link} 
-            className={activeSection === link ? "active" : ""}
-            onClick={() => setActiveSection(link)}
+      <div className="navbar-left">
+        <h2>My Productivity</h2>
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </div>
+      </div>
+
+      <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
+        {sections.map((sec) => (
+          <li
+            key={sec}
+            className={activeSection === sec ? "active" : ""}
+            onClick={() => {
+              setActiveSection(sec);
+              setMenuOpen(false);
+            }}
           >
-            {link.charAt(0).toUpperCase() + link.slice(1)}
+            {sec.charAt(0).toUpperCase() + sec.slice(1)}
           </li>
         ))}
       </ul>
+
+      <div className="navbar-user">
+        <span>{user?.username || user?.email}</span>
+        <img
+          src={`https://ui-avatars.com/api/?name=${user?.username || user?.email}&background=6A9C89&color=F5E8B7`}
+          alt="User"
+          className="user-icon"
+        />
+      </div>
     </nav>
-  )
+  );
 }
