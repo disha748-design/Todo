@@ -1,0 +1,137 @@
+.wellbeing-container {
+   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Background Image */
+  background: url('/well.jpg') center/cover no-repeat; /* replace with your filename */
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section */
+.wellbeing-section {
+  margin-bottom: 25px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #F5FFF5;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+.wellbeing-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Mood Input */
+.mood-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mood-input input[type="range"] {
+  flex: 1;
+}
+
+.mood-history {
+  margin-top: 15px;
+}
+
+.mood-item {
+  background: #E8FFD7;
+  padding: 10px 14px;
+  margin: 6px 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Gratitude List */
+.gratitude-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.gratitude-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F5FFF5;
+  padding: 12px 16px;
+  margin: 6px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.gratitude-item button {
+  background: #CD5C08;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px 12px;
+  color: #F5E8B7;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.gratitude-item button:hover {
+  background: #A66E38;
+  color: #FFF;
+}
+
+/* Blockquote / Quote */
+blockquote {
+  font-style: italic;
+  margin: 0;
+  padding-left: 15px;
+  border-left: 4px solid #B45253;
+  background: #FFF5E8;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #3E5F44;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wellbeing-container {
+    padding: 20px;
+  }
+  .wellbeing-section {
+    padding: 16px;
+  }
+  .mood-input {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .gratitude-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wellbeing-container {
+    padding: 15px;
+  }
+  .wellbeing-section {
+    padding: 12px;
+  }
+  .mood-item,
+  .gratitude-item,
+  blockquote {
+    padding: 10px 12px;
+  }
+}

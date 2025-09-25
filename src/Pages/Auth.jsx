@@ -6,6 +6,7 @@ export default function Auth({ onLogin }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isSignup, setIsSignup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -14,62 +15,54 @@ export default function Auth({ onLogin }) {
     setLoading(true);
     setErrorMsg("");
 
-    // Check if user exists
-    const { data: existingUser, error: fetchError } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", email)
-      .single();
+    try {
+      if (isSignup) {
+        // 🔹 Sign up with Supabase Auth
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+        });
 
-    if (fetchError && fetchError.code !== "PGRST116") {
-      setErrorMsg(fetchError.message);
-      setLoading(false);
-      return;
-    }
+        if (signUpError) throw signUpError;
 
-    if (existingUser) {
-      // Login
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+        // 🔹 Insert extra user info in 'users' table
+        if (signUpData?.user) {
+          const { data: userData, error: userError } = await supabase
+            .from("users")
+            .insert([
+              { id: signUpData.user.id, email, username },
+            ])
+            .select();
 
-      if (error) setErrorMsg(error.message);
-      else onLogin(data.user);
-    } else {
-      // Sign up
-      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+          if (userError) throw userError;
 
-      if (signUpError) {
-        setErrorMsg(signUpError.message);
-        setLoading(false);
-        return;
+          // Trigger login callback
+          onLogin(signUpData.user);
+        }
+
+      } else {
+        // 🔹 Login with Supabase Auth
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) throw error;
+        if (data?.user) onLogin(data.user);
       }
-
-      // Insert into users table
-      await supabase.from("users").insert([{ id: signUpData.user.id, email, username }]);
-
-      // Direct login
-      const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (loginError) setErrorMsg(loginError.message);
-      else onLogin(loginData.user);
+    } catch (err) {
+      setErrorMsg(err.message || "Something went wrong!");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1>Welcome</h1>
-        <p>Sign up or log in with your account</p>
+        <h1>{isSignup ? "Create Account" : "Welcome Back"}</h1>
+        <p>{isSignup ? "Sign up with your details" : "Log in to continue"}</p>
+
         <form onSubmit={handleAuth}>
           <input
             type="email"
@@ -78,13 +71,17 @@ export default function Auth({ onLogin }) {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <input
-            type="text"
-            placeholder="Name"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+
+          {isSignup && (
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          )}
+
           <input
             type="password"
             placeholder="Password"
@@ -92,11 +89,28 @@ export default function Auth({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button type="submit" disabled={loading}>
-            {loading ? "Processing..." : "Continue"}
+            {loading
+              ? "Processing..."
+              : isSignup
+              ? "Sign Up"
+              : "Log In"}
           </button>
         </form>
+
         {errorMsg && <p className="error">{errorMsg}</p>}
+
+        {/* Toggle between login/signup */}
+        <p style={{ marginTop: "15px" }}>
+          {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
+          <span
+            style={{ color: "#646cff", cursor: "pointer" }}
+            onClick={() => setIsSignup(!isSignup)}
+          >
+            {isSignup ? "Log in" : "Sign up"}
+          </span>
+        </p>
       </div>
     </div>
   );

@@ -1,24 +1,26 @@
 /* Sidebar container */
 .sidebar {
-  width: 220px;
-  background-color: #C1D8C3;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 15px; /* spacing below navbar */
+  width: 210px;
+  background: linear-gradient(135deg, #FFEEAD, #FFAD60);
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px; /* spacing below navbar */
   height: calc(100vh - 70px);
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.1);
 }
 
 /* Sidebar heading */
 .sidebar h3 {
   margin-top: 0;
   margin-bottom: 20px;
-  color: #3E5F44;
-  font-size: 1.2rem;
-  font-weight: 600;
+  color: #B45253;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 /* Sidebar list */
@@ -28,26 +30,29 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   flex: 1;
 }
 
 /* Sidebar items */
 .sidebar li {
   padding: 12px 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  color: #3E5F44;
+  transition: all 0.2s ease-in-out;
+  color: #B45253;
   font-weight: 500;
+  background-color: #F5E8B7;
+  border: 1px solid #FFDFA6;
 }
 
 /* Active / hover state */
 .sidebar li.active,
 .sidebar li:hover {
-  background-color: #6A9C89;
+  background: linear-gradient(135deg, #FFAD60, #B45253);
   color: #F5E8B7;
-  transform: translateX(2px);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive for tablets (medium screens) */
@@ -59,18 +64,19 @@
     padding: 10px 15px;
     border-radius: 0;
     margin-top: 0;
-    box-shadow: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #FFEEAD, #FFAD60);
   }
   .sidebar ul {
     flex-direction: row;
-    gap: 10px;
+    gap: 8px;
     justify-content: space-around;
     width: 100%;
   }
   .sidebar li {
     flex: 1;
     text-align: center;
-    padding: 10px 5px;
+    padding: 10px 6px;
   }
 }
 
@@ -84,10 +90,10 @@
   }
   .sidebar ul {
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
   }
   .sidebar li {
     padding: 10px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }

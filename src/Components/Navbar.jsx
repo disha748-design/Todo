@@ -3,12 +3,12 @@ import "./Navbar.css";
 
 export default function Navbar({ activeSection, setActiveSection, user }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const sections = ["todos", "mindmap", "diary", "pomodoro", "profile"];
+  const sections = ["todos", "wellbeing", "diary", "pomodoro", "profile"];
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h2>My Productivity</h2>
+        <h2>My Planner</h2>
         <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </div>
@@ -30,7 +30,6 @@ export default function Navbar({ activeSection, setActiveSection, user }) {
       </ul>
 
       <div className="navbar-user">
-        <span>{user?.username || user?.email}</span>
         <img
           src={`https://ui-avatars.com/api/?name=${user?.username || user?.email}&background=6A9C89&color=F5E8B7`}
           alt="User"

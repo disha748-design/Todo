@@ -1,0 +1,58 @@
+.pomodoro-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('/backgrd.jpg') center/cover no-repeat; /* Replace with your image path */
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: relative;
+  background: rgba(0,0,0,0.4); /* semi-transparent overlay for contrast */
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.timer-display {
+  font-size: 3rem;
+  margin: 20px 0;
+  font-weight: 700;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.timer-controls button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: #A3CCDA; /* light blue */
+  color: #3E5F44;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.timer-controls button:hover {
+  background: #BDE3C3; /* greenish */
+  transform: translateY(-2px);
+}
+
+.sessions-count {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}

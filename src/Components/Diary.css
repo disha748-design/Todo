@@ -1,0 +1,216 @@
+/* Diary Main Container with Background Image */
+.h2{
+  color: #000B58;
+  text-align: center;
+  margin-top: 20px; 
+}
+.diary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+
+  /* Background Image */
+  background: url('/journal.jpg') center/cover no-repeat; /* replace with your filename */
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay for readability */
+.diary-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.35); /* semi-transparent white overlay */
+  z-index: 0;
+  border-radius: 16px;
+}
+
+/* Ensure form and notes are above overlay */
+.diary-form,
+.diary-notes,
+.diary-note-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.85); /* semi-transparent white for readability */
+  border-radius: 12px;
+}
+
+/* Add Note Form */
+.diary-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.diary-form input,
+.diary-form textarea {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.diary-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.diary-form button {
+  background-color: #B95E82;
+  color: #F5E8B7;
+  border: none;
+  padding: 12px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  width: fit-content;
+}
+
+.diary-form button:hover {
+  background-color: #B95E82;
+}
+
+/* Notes List */
+.diary-notes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+/* Single Note Card */
+.diary-note-card {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.diary-note-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.diary-note-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #000B58;
+}
+
+.diary-note-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.diary-note-card small {
+  color: #999;
+  font-size: 0.8rem;
+}
+.diary-container h2 {
+  color: #9112BC;      /* purple color */
+  text-align: center;   /* center horizontally */
+  font-size: 2rem;      /* bigger size */
+  font-weight: 700;
+  margin: 0 0 20px 0;   /* spacing below heading */
+}
+
+/* Delete Button */
+.diary-note-card button {
+  align-self: flex-end;
+  background-color: #B95E82;
+  color: #F5E8B7;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.diary-note-card button:hover {
+  background-color: #6A9C89;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.note-title {
+  cursor: pointer;
+  color: #000B58;
+  transition: color 0.2s;
+}
+
+.note-title:hover {
+  color: #5e936c;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+  .diary-container {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .diary-form input,
+  .diary-form textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .diary-note-card {
+    padding: 15px;
+  }
+
+  .diary-note-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .diary-note-card p {
+    font-size: 0.9rem;
+  }
+}
